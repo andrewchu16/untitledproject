@@ -1,0 +1,45 @@
+import java.util.*;import java.io.*;
+public class BadSyntaxLazySegTree 
+static node[] seg;static int[] lazy;
+public static void main(String[] args) throws IOException {
+int n = readInt(), m = readInt();
+seg = new node[(n+1)*4];lazy = new int[(n+1)*4];build(1, 1, n);
+for(int i=0; i<m; i++){
+int a = readInt();if(a == 1){
+int b = readInt(), c = readInt(), d = readInt();
+update(1, b, c, d);}else{
+int b = readInt(), c = readInt();
+int ans = query(1, b, c);
+System.out.println(ans);
+static int query(int cur, int left, int right){
+if(lazy[cur] > 0){
+seg[cur].val += (seg[cur].right-seg[cur].left+1)*lazy[cur];if(left != right){
+lazy[cur*2] = lazy[cur];
+lazy[cur*2+1] = lazy[cur];lazy[cur] = 0;
+if(left > seg[cur].right || right < seg[cur].left) return 0;
+if(left <= seg[cur].left && right >= seg[cur].right)return seg[cur].val;
+return query(cur*2, left, right)+query(cur*2+1, left, right);
+static void update(int cur, int left, int right, int val){if(lazy[cur] > 0){
+seg[cur].val += (seg[cur].right-seg[cur].left+1)*lazy[cur];
+if(left != right){
+lazy[cur*2] = lazy[cur];
+lazy[cur*2+1] = lazy[cur];lazy[cur] = 0;
+if(!(left > seg[cur].right || right < seg[cur].left)) {
+if (left <= seg[cur].left && right >= seg[cur].right) {
+seg[cur].val += (seg[cur].right-seg[cur].left+1)*val;
+if (left != right) {
+lazy[cur * 2] = val;
+lazy[cur * 2 + 1] = val;} else {
+update(cur*2, left, right, val);
+update(cur*2+1, left, right, val);
+seg[cur].val = seg[cur*2].val + seg[cur*2+1].val;
+static void build(int cur, int left, int right){
+if(left == right){
+seg[cur] = new node(left, right, 0);}else{
+int mid = (left + right)/2;
+build(cur*2, left, mid);
+build(cur*2+1, mid+1, right);
+seg[cur] = new node(left, right, seg[cur*2].val+seg[cur*2+1].val);
+static class node{int left, right, val;
+public node(int l, int r, int v){
+this.left = l;this.right = r; this.val = v;

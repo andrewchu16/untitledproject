@@ -52,7 +52,7 @@ class Player():
         self.y += moveVecy
         self.body.x, self.body.y = self.x, self.y
 
-        self.attack.update(self.pos)
+        self.attack.update(self.pos, (), (), "r or m")
 
         self.hp.update()
 

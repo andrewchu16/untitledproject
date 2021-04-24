@@ -17,20 +17,26 @@ class Attack:
 
         self.slope: float = 0.0
 
-        self.rect = pygame.Rect((0, 0), (20, 20))
+        self.body = pygame.Rect((0, 0), (20, 20))
 
     @property 
     def pos(self) -> tuple((int, int)): 
-        return (self.rect.x, self.rect.y)
+        return (self.body.x, self.body.y)
 
     # ppos: player's position as a list/tuple
     def update(self, start: tuple((int, int)), target: tuple((int, int)), mode: str):
+        """
+        [args]
+        start: where the attack originates from
+        end: the direction the attack is aimed
+        mode: melee or ranged
+        """
         if self.counter == 0:
             self.counter = 1
             self.mode =  mode
             self.target = target[:]
             self.start = start[:]
-            self.slope = None if ppos[0] == cursor.x else (ppos[1] - cursor.y) / (ppos[0] - cursor.x)
+            self.slope = None if start[0] == target[0] else (start[1] - target[1]) / (start[0] - target[0])
 
 
         if self.counter != 0 and self.mode == "r":
@@ -41,7 +47,7 @@ class Attack:
 
     def render(self, screen):
         if self.mode == "r":
-            pygame.draw.rect(screen, (180, 50, 50), self.rect)
+            pygame.draw.rect(screen, (180, 50, 50), self.body)
 
         elif self.mode == "m":
             print("rendering melee attack...", self.counter)
@@ -52,15 +58,15 @@ class Attack:
         if self.slope != None:
             # calculate y using x
             if abs(self.slope) < 10:
-                self.rect.x = distance / math.sqrt(self.slope**2 + 1) * (-1 if self.target[0] < self.start[0] else 1) + self.start[0]
-                self.rect.y = self.slope * (self.rect.x - self.target[0]) + self.target[1]
+                self.body.x = distance / math.sqrt(self.slope**2 + 1) * (-1 if self.target[0] < self.start[0] else 1) + self.start[0]
+                self.body.y = self.slope * (self.body.x - self.target[0]) + self.target[1]
             # calculate x using y
             else:
-                self.rect.y = distance * (-1 if self.target[1] < self.start[1] else 1) + self.start[1]
-                self.rect.x = (self.rect.y - self.start[1]) / self.slope + self.start[0]
+                self.body.y = distance * (-1 if self.target[1] < self.start[1] else 1) + self.start[1]
+                self.body.x = (self.body.y - self.start[1]) / self.slope + self.start[0]
         else:
-            self.rect.x = self.start[0]
-            self.rect.y = self.start[1] + distance * (-1 if self.target[1] < self.start[1] else 1)
+            self.body.x = self.start[0]
+            self.body.y = self.start[1] + distance * (-1 if self.target[1] < self.start[1] else 1)
         
         self.counter += 30
 
