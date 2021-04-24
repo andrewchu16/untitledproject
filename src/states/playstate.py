@@ -29,7 +29,7 @@ class PlayState():
         self.lettergen = Letterspit()
         self.lettergen.cap = 20
         self.lettergen.level = 1
-        self.enemylist = [Spitter(100, (50, 50)),Spitter(100, (100, 100)),Spitter(100, (150, 150))]
+        self.enemylist = []
 
         self.armageddon_status = False
         self.armageddon_cur = 0
@@ -39,19 +39,19 @@ class PlayState():
         self.turrets = []
         self.money_font = pygame.font.SysFont("Arial", 50)
 
-<<<<<<< HEAD
-        self.turretup = pygame.Surface((60, 60))
-        self.healthup = pygame.Surface((60, 60))
-        self.attackup = pygame.Surface((60, 60))
-        self.turretup.fill((122,122,122))
-        self.healthup.fill((210, 69, 210))
-        self.attackup.fill((96,69,96))
-=======
->>>>>>> 9270cdc4b3d235f61c29b9cb681d36d454a7a3d1
+        self.timer = 0
+        self.cnter = 0
+
+        #self.turretup = pygame.Surface((60, 60))
+        #self.healthup = pygame.Surface((60, 60))
+        #self.attackup = pygame.Surface((60, 60))
+        #self.turretup.fill((122,122,122))
+        #self.healthup.fill((210, 69, 210))
+        #self.attackup.fill((96,69,96))
 
     def enter(self):
         # Armageddon happens at the start for testing purposes FOR NOW
-        self.armageddon_status = True
+        #self.armageddon_status = True
         f = open('src/utilities/segmenttree.txt', 'r')
         self.arma = f.readlines()
         f.close()
@@ -89,6 +89,19 @@ class PlayState():
         self.arma_counter += 1
 
     def update(self, keyspressed, keysdown):
+
+        self.cnter += 1
+        if self.cnter > 80:
+            self.timer += 1
+        
+        if self.timer > 80:
+            self.armageddon_status = True
+        
+        if self.timer % 20 == 0:
+            self.lettergen.level += 1
+        
+            
+
         # Calls armageddon 
         if self.armageddon_status:
             self.armageddon()
@@ -100,16 +113,26 @@ class PlayState():
         self.player.update(keysdown)
         removelist = []
 
+        
         # TODO: calculate bullet and letter collisions, update letter/bullet hp here
-        for nxt in self.letter:
-            for bullet in self.player.bulletList:
-                bullet.update() 
+        for bullet in self.player.bulletList:
+            bullet.update() 
+            for nxt in self.letter: 
                 if bullet.body.colliderect(nxt.body):
-                    bullet.hp -= 1
-                    nxt.hp -= 5
-
-                if bullet.hp <= 0 or bullet.distance > bullet.rRange:
-                    removelist.append(bullet)
+                    tmp = bullet.hp
+                    bullet.hp -= min(nxt.hp, tmp)
+                    nxt.hp -= min(nxt.hp, tmp)
+            for nxt in self.enemylist:
+                for go in nxt.peons:
+                    if bullet.body.colliderect(go.body):
+                        removelist.append(go)
+                        tmp = bullet.hp
+                        bullet.hp -= min(go.hp, tmp)
+            
+            
+            if bullet.hp <= 0 or bullet.distance > bullet.rRange:
+                # print("bullet collision:", bullet.hp)
+                removelist.append(bullet)
                 
         # When letters hit the player, health and letter removal is executed here
         for nxt in self.letter:
@@ -131,8 +154,9 @@ class PlayState():
         for nxt in removelist:
             if nxt in self.letter:
                 self.letter.remove(nxt)
-
-        reeemovelist = []
+            elif nxt in self.player.bulletList:
+                self.player.bulletList.remove(nxt)
+        removelist = []
         for go in self.enemylist:
             for nxt in go.peons:
                 nxt.update()
@@ -179,16 +203,14 @@ class PlayState():
             for go in nxt.peons:
                 go.render(screen, (h, w))
             nxt.render(screen)
-<<<<<<< HEAD
         self.player.render(screen, (h, w))
-        screen.blit(self.turretup, (260, 640))
-        screen.blit(self.healthup, (320, 640))
-        screen.blit(self.attackup, (380, 640))
-=======
+        # screen.blit(self.turretup, (260, 640))
+        #screen.blit(self.healthup, (320, 640))
+        #screen.blit(self.attackup, (380, 640))
 
         for nxt in self.player.bulletList:
             nxt.render(screen, (w, h))
->>>>>>> 9270cdc4b3d235f61c29b9cb681d36d454a7a3d1
+
         money_text = self.money_font.render("$"+str(self.money), False, (38,54,139))
         screen.blit(money_text, ((700-money_text.get_width())//2, 40))
 

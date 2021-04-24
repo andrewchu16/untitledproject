@@ -48,3 +48,4 @@ class Bullet():
 
     def render(self, screen, dims):
         screen.blit(self.sprite, (self.x, self.y))
+        pygame.draw.rect(screen, (240, 2, 100), self.body)
