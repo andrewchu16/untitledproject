@@ -39,6 +39,7 @@ class PlayState():
         self.turrets = []
         self.money_font = pygame.font.SysFont("Arial", 50)
 
+
     def enter(self):
         # Armageddon happens at the start for testing purposes FOR NOW
         self.armageddon_status = True
@@ -94,8 +95,12 @@ class PlayState():
         for nxt in self.letter:
             for bullet in self.player.bulletList:
                 bullet.update() 
-                if self.player:
-                    pass
+                if bullet.body.colliderect(nxt.body):
+                    bullet.hp -= 1
+                    nxt.hp -= 5
+
+                if bullet.hp <= 0 or bullet.distance > bullet.rRange:
+                    removelist.append(bullet)
                 
         # When letters hit the player, health and letter removal is executed here
         for nxt in self.letter:
@@ -166,6 +171,9 @@ class PlayState():
             for go in nxt.peons:
                 go.render(screen, (h, w))
             nxt.render(screen)
+
+        for nxt in self.player.bulletList:
+            nxt.render(screen, (w, h))
         money_text = self.money_font.render("$"+str(self.money), False, (38,54,139))
         screen.blit(money_text, ((700-money_text.get_width())//2, 40))
 
