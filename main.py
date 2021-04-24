@@ -1,12 +1,14 @@
 import pygame
 from src.utilities.mouse import cursor
+from statemachine import StateMachine
 from src.utilities.palette import col
 # import config
-# ok so youre supposed to make a config file for like tokens and whatever but idk if we are doing to be using any tokens or whatever but anyways config is just going to exist and will go into gitignore
 
 # put display updates in here
 def update_display():
     gameWindow.fill(col["white"])
+    
+    state.render(gameDisplay, screen_heigh, screen_width)
 
     pygame.display.update()
 
@@ -14,17 +16,20 @@ def update_display():
 def update_events():
     cursor.update(scroll)
     keysdown = pygame.key.get_pressed()
+    state.update(keyspressed, keysdown)
 
 if __name__ == '__main__':
     pygame.init()
     
     # dimmensions of window
-    WIDTH, HEIGHT = 800, 600
+    WIDTH, HEIGHT = 600, 600
 
     gameWindow = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("untitled project!!")
 
     clock = pygame.time.Clock()
+
+    state = StateMachine()
 
     running = True
 
@@ -51,6 +56,5 @@ if __name__ == '__main__':
         # update screen
         update_display()
         clock.tick(60)
-                
 
-    pygame.quit() 
+    pygame.quit()

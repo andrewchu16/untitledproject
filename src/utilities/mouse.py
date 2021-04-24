@@ -1,5 +1,5 @@
 import pygame
-from palette import col
+from src.utilities.palette import col
 
 
 # class for handling mouse events
@@ -18,7 +18,9 @@ class Mouse:
         mclick: tuple[bool, bool, bool] = pygame.mouse.get_pressed()
         self.Lclick: bool = mclick[0]
         self.Rclick: bool = mclick[2]
-        se;f.rect.x, self.rect.y = self.x, self.y
+        self.rect.x, self.rect.y = self.x, self.y
 
     def render(self, screen):
         pyagem.draw.rect(screen, col["white"], self.rect)
+
+cursor = Mouse()

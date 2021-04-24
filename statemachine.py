@@ -4,16 +4,16 @@ from src.states import *
 
 class StateMachine:
   
-  def __init__(self):
+    def __init__(self):
         self.states = {
-            "start": 0,
-            "intro": 0,
-            "pause": 0,
-            "setting": 0,
+            "play": playstate.PlayState(),
+            "intro": introstate.Introstate(),
+            "pause": pausestate.PauseState(),
+            "setting": settingstate.SettingState()
         }
-    self.currentstates["start"]
-
-    self.currentstate.enter()
+        self.currentstates = ["start"]
+        
+        self.currentstate.enter()
   
     def change(self, nxt):
         self.currentstate.exit()
