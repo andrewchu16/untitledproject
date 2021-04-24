@@ -11,12 +11,12 @@ class Player():
     def __init__(self):
         self.dims: tuple((int, int)) = (50, 50)
         self.sprite = pygame.Surface((50, 50))
-        self.sprite.fill((69, 69, 69))
+        self.sprite.fill((255,100,180))
         self.x, self.y = 400, 400
         self.body = pygame.Rect((self.x, self.y), (self.w, self.h))
 
         #health
-        self.hp = Healthbar(100)
+        self.hp = Healthbar(1000)
         
         #mobility
         self.speed = 2

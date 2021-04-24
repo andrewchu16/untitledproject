@@ -6,7 +6,7 @@ from src.utilities.palette import col
 
 # put display updates in here
 def update_display():
-    gameWindow.fill(col["white"])
+    gameWindow.fill(col["black"])
     
     state.render(gameWindow, WIDTH, HEIGHT)
     
