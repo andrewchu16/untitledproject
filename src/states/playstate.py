@@ -33,12 +33,14 @@ class PlayState():
     def update(self, keyspressed, keysdown):
         #update things
         self.player.update(keysdown)
-        self.letter.update()
+        if self.letter != None:
+            self.letter.update()
         if letter.x > 600 or letter.x < 0 or letter.y > 600 or letter.x < 0:
-            self.letter 
+            self.letter = None
     
 
     def render(self, screen, h: float, w: float):
         self.player.render(screen, (h, w))
-        self.letter.render(screen, (h, w))
+        if self.letter != None:
+            self.letter.render(screen, (h, w))
 
