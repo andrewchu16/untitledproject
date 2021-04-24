@@ -27,7 +27,7 @@ class Player(pygame.sprite.sprite):
     def h(self):
         return self.dims[1]
 
-    def update(self, keysdown: list((int))):
+    def update(self, keysdown: list((bool))):
 
         moveVecx = 0
         moveVecy = 0

@@ -18,6 +18,7 @@ def update_display():
 def update_events():
     cursor.update(scroll)
     keysdown = pygame.key.get_pressed()
+    
     state.update(keyspressed, keysdown)
 
 if __name__ == '__main__':
