@@ -1,4 +1,5 @@
 import pygame
+from pygame.constants import RESIZABLE
 from src.utilities.mouse import cursor
 from statemachine import StateMachine
 from src.utilities.palette import col
