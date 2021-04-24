@@ -9,7 +9,7 @@ from src.bullet import Bullet
 class Player():
 
     def __init__(self):
-        self.w, self.h = 50, 50
+        self.w, self.h = 39, 63
         self.sprite = pygame.Surface((50, 50))
         self.sprite.fill((255, 100, 180))
         self.x, self.y = 400, 400

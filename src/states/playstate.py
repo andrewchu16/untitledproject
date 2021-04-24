@@ -100,7 +100,12 @@ class PlayState():
         if self.timer % 20 == 0:
             self.lettergen.level += 1
         
-            
+        if self.timer % 5 == 0:
+            if random.randint(1, 2) == 1:
+                x, y = random.choice([0, 700]), random.randint(0, 700)
+            else:
+                x, y = random.randint(0, 700), random.choice([0, 700])
+            self.enemylist.append(Spitter(self.timer // 5, (x,y)))
 
         # Calls armageddon 
         if self.armageddon_status:
@@ -189,11 +194,11 @@ class PlayState():
 
             if go.hp <= 0:
                 self.money += go.max_health
-                reeemovelist.append(go)
+                removelist.append(go)
 
             go.update((self.player.x, self.player.y))
         
-        for nxt in reeemovelist:
+        for nxt in removelist:
             self.enemylist.remove(nxt)
 
     def render(self, screen, h: float, w: float):
