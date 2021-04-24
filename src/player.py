@@ -3,12 +3,12 @@ import math
 import random
 
 
-
 class Player():
 
     def __init__(self):
         self.dims: tuple((int, int)) = (50, 50)
         self.sprite = pygame.Surface((50, 50))
+        self.sprite.fill((69, 69, 69))
         self.x, self.y = 50, 50
         self.body = pygame.Rect((self.x, self.y), (self.w, self.h))
 
@@ -16,7 +16,7 @@ class Player():
         self.hp = 1000
         
         #mobility
-        self.speed = 5
+        self.speed = 2
 
     
     @property
@@ -42,10 +42,10 @@ class Player():
         
         if abs(moveVecx) == abs(moveVecy) and moveVecx != 0:
             diag = math.sqrt(2)
-            moveVecx = math.ceil(moveVecx/diag)
-            moveVecy = math.ceil(moveVecy/diag)
+            moveVecx = round(moveVecx/diag, 2)
+            moveVecy = round(moveVecy/diag, 2)
         
-        self.body.move_ip(moveVectorx, moveVectory)
+        self.body.move_ip(moveVecx, moveVecy)
         self.x = self.body.x
         self.y = self.body.y
         

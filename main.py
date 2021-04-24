@@ -19,9 +19,13 @@ def update_events():
     cursor.update(scroll)
     keysdown = pygame.key.get_pressed()
     
+    # keyspressed = list of keys that are pressed 
+    # keysdown = dictionary of all keys, with boolean of if they are pressed
     state.update(keyspressed, keysdown)
 
+# note: variables in here are global, not local
 if __name__ == '__main__':
+    # initialize pygame window
     pygame.init()
     
     # dimmensions of window
@@ -32,6 +36,7 @@ if __name__ == '__main__':
 
     clock = pygame.time.Clock()
 
+    # used to switch between menu, pause, settings, etc
     state = StateMachine()
 
     running = True

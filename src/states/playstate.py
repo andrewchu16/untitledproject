@@ -1,6 +1,6 @@
 import pygame
-from src.utilities.buttons import Button
 from src.player import Player
+
 
 class PlayState():
 
