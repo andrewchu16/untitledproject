@@ -80,6 +80,8 @@ class PlayState():
                 if self.player.hp.hp - 5 >= 0:
                     self.player.hp.hp -= 5
                 removelist.append(nxt)
+            if self.player.attack.body.colliderect(nxt.body):
+                removelist.append(nxt)
         
         for nxt in self.letter:
             nxt.update()
