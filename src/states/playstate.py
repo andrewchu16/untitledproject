@@ -98,7 +98,7 @@ class PlayState():
         if self.cnter % 1000 == 0 and self.cnter != 0:
             self.armageddon_status = True
         
-        if self.cnter % 00 == 0 and self.timer != 0:
+        if self.cnter % 300 == 0 and self.timer != 0:
             self.lettergen.level += 1
         
         if self.cnter % 200 == 0 and self.timer != 0:
