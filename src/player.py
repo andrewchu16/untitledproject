@@ -33,6 +33,7 @@ class Player():
         self.attack = Attack(1000)
 
         self.spritesheet = pygame.image.load('assets/images/character.png')
+        self.sprite.blit(pygame.transform.scale(self.spritesheet, (50, 50)), (0, 0))
     
     @property
     def dims(self) -> tuple((int, int)):
