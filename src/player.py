@@ -1,10 +1,9 @@
 import pygame
 import math
 import random
-import asyncio
-from time import sleep
+from src.utilities.mouse import cursor
 from src.utilities.healthbar import Healthbar
-
+from src.attack import Attack
 
 class Player():
 
@@ -21,6 +20,8 @@ class Player():
         #mobility
         self.speed = 2
 
+        self.attack = Attack(1000)
+
     
     @property
     def w(self):
@@ -29,6 +30,10 @@ class Player():
     @property 
     def h(self):
         return self.dims[1]
+
+    @property 
+    def pos(self):
+        return (self.x, self.y)
 
     def update(self, keysdown: list):
 
@@ -52,27 +57,13 @@ class Player():
         self.x = self.body.x
         self.y = self.body.y
 
+        self.attack.update(self.pos)
+
         self.hp.update()
-        
+
 
     def render(self, screen, dims):
         screen.blit(self.sprite, (self.x, self.y))
         self.hp.render(screen)
-        #self.attack_ranged(screen)
-    
-    # "r" = ranged, "m" = melee
-    def attack(self, screen, style: str):
-        if style == "r":
-            self.attack_ranged(screen)
-        elif style == "m":
-            self.attack_melee()
 
-    # moving laser
-    def attack_ranged(self, screen):
-        for i in range(1, 361, 45):
-            radians = math.radians(i)
-            slope = math.tan(radians)
-            dx = self.x + 20 * (-1 if i < 180 else 1)
-            dy = self.y + slope * -20
-            pygame.draw.line(screen, (80, 150, 50), (self.x, self.y), (dx, dy), 6)
-            pygame.display.update()
+        self.attack.render(screen, self.pos)
