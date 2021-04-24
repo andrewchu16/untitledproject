@@ -95,13 +95,13 @@ class PlayState():
         if self.cnter % 80 == 0 and self.cnter != 0:
             self.timer += 1
         
-        if self.timer % 80 == 0 and self.timer != 0:
+        if self.timer % 100 == 0 and self.timer != 0:
             self.armageddon_status = True
         
-        if self.timer % 20 == 0:
+        if self.timer % 100 == 0 and self.timer != 0:
             self.lettergen.level += 1
         
-        if self.timer % 100 == 0:
+        if self.timer % 100 == 0 and self.timer != 0:
             if random.randint(1, 2) == 1:
                 x, y = random.choice([0, 700]), random.randint(0, 700)
             else:
@@ -147,6 +147,7 @@ class PlayState():
                     self.player.hp.hp -= nxt.hp
                 else:
                     #bye bye
+                    print("you died lol")
                     sys.exit(0)
                 removelist.append(nxt)
         

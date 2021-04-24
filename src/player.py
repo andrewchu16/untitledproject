@@ -32,7 +32,7 @@ class Player():
 
         self.attack = Attack(1000)
 
-        # self.spritesheet = pygame.image.load('assets/images/character.png')
+        self.spritesheet = pygame.image.load('assets/images/character.png')
     
     @property
     def dims(self) -> tuple((int, int)):
