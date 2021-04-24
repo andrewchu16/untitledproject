@@ -13,7 +13,7 @@ def update_display():
     cursor.render(gameWindow)
 
     pygame.display.update()
-
+    
 # put event updates here
 def update_events():
     cursor.update(scroll)

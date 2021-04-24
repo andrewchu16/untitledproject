@@ -44,9 +44,9 @@ class Letterspit():
 
         self.cap = 20
         if random.randint(1, 2) == 1:
-            self.x, self.y = random.choice([0, 600]), random.randint(0, 600)
+            self.x, self.y = random.choice([0, 700]), random.randint(0, 700)
         else:
-            self.x, self.y = random.randint(0, 600), random.choice([0, 600])
+            self.x, self.y = random.randint(0, 700), random.choice([0, 700])
     
     def update(self, pos, self_pos):
         #update things
@@ -71,7 +71,7 @@ class Letterspit():
             self.cur = 0
             self.ind = random.randint(0, len(sentences)-1)
             if random.randint(1, 2) == 1:
-                self.x, self.y = random.choice([0, 600]), random.randint(0, 600)
+                self.x, self.y = random.choice([0, 700]), random.randint(0, 700)
             else:
-                self.x, self.y = random.randint(0, 600), random.choice([0, 600])
+                self.x, self.y = random.randint(0, 700), random.choice([0, 700])
             return None
