@@ -1,6 +1,6 @@
 import pygame
 import math
-from src.utilities.mouse import cursor
+# from src.utilities.mouse import cursor
 
 
 class Attack:
@@ -24,12 +24,12 @@ class Attack:
         return (self.rect.x, self.rect.y)
 
     # ppos: player's position as a list/tuple
-    def update(self, ppos):
-        if (cursor.Lclick or cursor.Rclick) and self.counter == 0:
+    def update(self, start: tuple((int, int)), target: tuple((int, int)), mode: str):
+        if self.counter == 0:
             self.counter = 1
-            self.mode = "m" if cursor.Lclick else "r"
-            self.target = [cursor.x, cursor.y]
-            self.start = ppos[:]
+            self.mode =  mode
+            self.target = target[:]
+            self.start = start[:]
             self.slope = None if ppos[0] == cursor.x else (ppos[1] - cursor.y) / (ppos[0] - cursor.x)
 
 
@@ -61,6 +61,7 @@ class Attack:
         else:
             self.rect.x = self.start[0]
             self.rect.y = self.start[1] + distance * (-1 if self.target[1] < self.start[1] else 1)
+        
         self.counter += 30
 
         if self.counter > self.duration:
@@ -69,6 +70,8 @@ class Attack:
 
     # melee attack
     def swing(self):
+
+
         self.counter += 80
 
         if self.counter > self.duration:
