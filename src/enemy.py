@@ -9,6 +9,7 @@ class Spitter():
     def __init__(self, level, start):
 
         self.hp = 15 * level
+        self.max_health = 15 * level
         self.spit_speed = max(math.ceil(65 - level * 5), 10)
         self.peon_lvl = level
         self.peons = []
@@ -24,6 +25,7 @@ class Spitter():
         #movement bias value
         self.bias_move = random.randint(-100, 100)
         self.lettergen = Letterspit()
+        self.lettergen.level = level * 2
         print(self.spit_speed)
         self.lettergen.cap = self.spit_speed
     

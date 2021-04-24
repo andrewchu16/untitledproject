@@ -41,6 +41,7 @@ class Letterspit():
     def __init__(self):
         self.cur = 0
         self.ind = random.randint(0, len(sentences)-1)
+        self.level = 0
 
         self.cap = 20
         if random.randint(1, 2) == 1:
@@ -66,7 +67,7 @@ class Letterspit():
                     "chy": math.sin(angle)
                 }
                 if sentences[self.ind][tmp//self.cap] != " ":
-                    return Letter(1, direction, (xx, yy), sentences[self.ind][tmp//self.cap], colours[col[self.ind][tmp//self.cap]])
+                    return Letter(self.level, direction, (xx, yy), sentences[self.ind][tmp//self.cap], colours[col[self.ind][tmp//self.cap]])
         else:
             self.cur = 0
             self.ind = random.randint(0, len(sentences)-1)

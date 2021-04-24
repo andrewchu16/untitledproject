@@ -28,7 +28,8 @@ class PlayState():
         # Summons a letterspit and creates enemy list
         self.lettergen = Letterspit()
         self.lettergen.cap = 20
-        self.enemylist = [Spitter(1, (50, 50))]
+        self.lettergen.level = 1
+        self.enemylist = [Spitter(100, (50, 50)),Spitter(100, (100, 100)),Spitter(100, (150, 150))]
 
         self.armageddon_status = False
         self.armageddon_cur = 0
@@ -99,8 +100,8 @@ class PlayState():
         # When letters hit the player, health and letter removal is executed here
         for nxt in self.letter:
             if self.player.body.colliderect(nxt.body):
-                if self.player.hp.hp - 5 >= 0:
-                    self.player.hp.hp -= 5
+                if self.player.hp.hp - nxt.hp >= 0:
+                    self.player.hp.hp -= nxt.hp
                 removelist.append(nxt)
         
         # Deletes old letters and awards money for killing letters 
@@ -117,7 +118,7 @@ class PlayState():
             if nxt in self.letter:
                 self.letter.remove(nxt)
 
-        # 
+        reeemovelist = []
         for go in self.enemylist:
             for nxt in go.peons:
                 nxt.update()
@@ -141,7 +142,21 @@ class PlayState():
             for nxt in removelist:
                 if nxt in go.peons:
                     go.peons.remove(nxt)
+            
+            if self.player.attack.body and self.player.attack.body.colliderect(go.body):
+                #two cases, letter has more or attack has more hp
+                    tmp = self.player.attack.hp
+                    self.player.attack.hp -= min(tmp, go.hp)
+                    go.hp -= min(tmp, go.hp)
+
+            if go.hp <= 0:
+                self.money += go.max_health
+                reeemovelist.append(go)
+
             go.update((self.player.x, self.player.y))
+        
+        for nxt in reeemovelist:
+            self.enemylist.remove(nxt)
 
     def render(self, screen, h: float, w: float):
         self.player.render(screen, (h, w))

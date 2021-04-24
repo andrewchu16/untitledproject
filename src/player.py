@@ -25,7 +25,7 @@ class Player():
         self.bulletHealth = 
 
         #health
-        self.hp = Healthbar(1000)
+        self.hp = Healthbar(250)
         
         #mobility
         self.speed = 4
