@@ -14,15 +14,16 @@ class PlayState():
     def enter(self):
 
         self.player = Player()
-        angle = math.atan2(self.player.y, self.player.x)
-        direction = {
-            "chx": math.cos(angle),
-            "chy": math.sin(angle)
-        }
         if random.randint(1, 2) == 1:
             startx, starty = random.choice([0, 600]), random.randint(0, 600)
         else:
             startx, starty = random.randint(0, 600), random.choice([0, 600])
+        angle = math.atan2(self.player.y-starty, self.player.x-startx)
+        direction = {
+            "angle": angle,
+            "chx": math.cos(angle),
+            "chy": math.sin(angle)
+        }
         self.letter = Letter(1, direction, (startx, starty))
   
     def exit(self):

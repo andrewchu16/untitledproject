@@ -54,25 +54,21 @@ class Player():
 
     def render(self, screen, dims):
         screen.blit(self.sprite, (self.x, self.y))
+        self.attack_ranged(screen)
     
     # "r" = ranged, "m" = melee
-    def attack(self, style: str):
+    def attack(self, screen, style: str):
         if style == "r":
-            asyncio.run(attack)
+            self.attack_ranged(screen)
+        elif style == "m":
+            self.attack_melee()
 
     # moving laser
-    def attack_ranged(self):
-        angle = math.atan2(self.player.y, self.player.x)
-        direction = {
-            "chx": math.cos(angle),
-            "chy": math.sin(angle)
-        }
-        if random.randint(1, 2) == 1:
-            startx, starty = 0, random.randint(0, 600)
-        else:
-            startx, starty = random.randint(0, 600), 0
-        self.letter = Letter(1, direction, (startx, starty))
-
-    # sweep attack
-    def attack_melee(self):
-        pass
+    def attack_ranged(self, screen):
+        for i in range(1, 361, 45):
+            radians = math.radians(i)
+            slope = math.tan(radians)
+            dx = self.x + 20 * (-1 if i < 180 else 1)
+            dy = self.y + slope * -20
+            pygame.draw.line(screen, (80, 150, 50), (self.x, self.y), (dx, dy), 6)
+            pygame.display.update()
