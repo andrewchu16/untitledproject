@@ -1,8 +1,13 @@
 import pygame
 from src.utilities.buttons import Button
 
+<<<<<<< Updated upstream
 start = Button((500, 150), (1, 1), None)
 setting = Button((500, 50), (100, 100), None)
+=======
+start = Button((500, 100), (1, 1), None)
+setting = Button((500, 50), (1, 1), None)
+>>>>>>> Stashed changes
 
 class IntroState():
 

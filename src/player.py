@@ -3,6 +3,10 @@ import math
 import random
 
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 class Player():
 
     def __init__(self):

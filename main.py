@@ -57,7 +57,7 @@ if __name__ == '__main__':
                     scroll -= 1
                 elif event.button == 5:
                     scroll = 1
-        
+                    
         # update events
         update_events()
 
