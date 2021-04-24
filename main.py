@@ -29,7 +29,7 @@ if __name__ == '__main__':
     pygame.init()
     
     # dimmensions of window
-    WIDTH, HEIGHT = 600, 600
+    WIDTH, HEIGHT = 1000, 1000
 
     gameWindow = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("untitled project!!")

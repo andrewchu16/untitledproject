@@ -12,6 +12,12 @@ class PlayState():
     def enter(self):
 
         self.player = Player()
+        angle = math.atan2(player.y, player.x)
+        direction = {
+            "chx": math.cos(angle)
+            "chy": math.sin(angle)
+        }
+        self.letter = Letter(1, direction)
   
     def exit(self):
 
@@ -21,8 +27,10 @@ class PlayState():
     def update(self, keyspressed, keysdown):
         #update things
         self.player.update(keysdown)
+        self.letter.update()
     
 
     def render(self, screen, h: float, w: float):
         self.player.render(screen, (h, w))
+        self.letter.render(screen, (h, w))
 

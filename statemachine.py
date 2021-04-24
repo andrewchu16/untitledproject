@@ -16,12 +16,12 @@ class StateMachine:
   
     def change(self, nxt):
         self.currentstate.exit()
-        self.currentstate = self.states[nxt] #so it says that 'turn' isnt a part of self.states (its not because self.states only has keys play intro pause setting)
+        self.currentstate = self.states[nxt]
         self.currentstate.enter()
   
     def update(self, keyspressed, keysdown):
         self.currentstate.update(keyspressed, keysdown)
-        if self.currentstate.changeTo != None:
+        if self.currentstate.changeTo:
             self.change(self.currentstate.changeTo)
             
             
