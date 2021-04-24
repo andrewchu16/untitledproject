@@ -1,17 +1,19 @@
 import pygame
 from src.utilities.buttons import Button
+from src.states.state import State
 
 
 start = Button((500, 150), (1, 1), None)
 setting = Button((500, 50), (100, 100), None)
 
-
-class IntroState():
+'''
+This state renders when the game begins, providing the player a menu to start their game
+'''
+class IntroState(State):
 
     def __init__(self):
-        self.changeTo = None
-        self.states = {"play", "intro", "pause", "setting"}
-  
+        super().__init__()
+
     def enter(self):
 
         def escape1():

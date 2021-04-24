@@ -12,9 +12,19 @@ setting
 
 ## please make sure you have indent as spaces: 4
 
-## Requirements
-Python at least like 3.5 or something.
-Pygame 2.0.1
-More than 1 gb ram
+## Inspiration
+
+## What it does
+
+## How we built it
+
+## Challenges we ran into
+
+## Accomplishments that we're proud of
+
+## What we learned
+
+## What's next for untitled project
+
 
 Thank you for reading README.md

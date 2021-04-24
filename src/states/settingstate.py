@@ -1,16 +1,20 @@
 import pygame
 from src.utilities.buttons import Button
+from src.states.state import State
 
 
 start = Button((500, 50), (1, 1), None)
 setting = Button((500, 50), (1, 1), None)
 
-class SettingState():
+'''
+Settings menu to change your game preferences
+'''
+class SettingState(State):
 
     def __init__(self):
-        self.changeTo = None
-        self.states = {"play", "intro", "pause", "setting"}
-  
+        super().__init__()
+
+
     def enter(self):
 
         def escape1():

@@ -1,15 +1,18 @@
 import pygame
 from src.utilities.buttons import Button
+from src.states.state import State
 
 start = Button((500, 50), (1, 1), None)
 setting = Button((500, 50), (1, 1), None)
 
-class PauseState():
+'''
+Triggered when the player pauses their game, the pausestate will allow the player to quit the program or resume their gameplay
+'''
+class PauseState(State):
 
     def __init__(self):
-        self.changeTo = None
-        self.states = {"play", "intro", "pause", "setting"}
-  
+        super().__init__()
+
     def enter(self):
 
         def escape1():

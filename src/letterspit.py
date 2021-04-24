@@ -1,13 +1,7 @@
 import pygame
-from src.player import Player
-from src.letters import Letter
-from src.states.state import State
 import math
 import random
 
-'''
-The main state of the game, this is the state that is going to render the game itself, including the players and enemies
-'''
 sentences = [
     'Traceback(mostrecentcalllast):',
     'ModuleNotFoundError:Nomodulenamedsrc',
@@ -40,36 +34,20 @@ colours = {
     '4': (255,255,255), #white
     '5': (240,0,255) #purple
 }
-class PlayState(State):
 
+class LetterSpit():
+    
     def __init__(self):
-        super().__init__()
-        self.player = None
-        self.letter = []
         self.cur = 0
         self.ind = random.randint(0, len(sentences)-1)
 
-        self.player = Player()
-
-        if random.randint(1, 2) == 1:
-            self.startx, self.starty = random.choice([0, 600]), random.randint(0, 600)
-        else:
-            self.startx, self.starty = random.randint(0, 600), random.choice([0, 600])
-  
-    def enter(self):
-        #do nothing
-        pass
-  
-    def exit(self):
-
-        self.changeTo = None
-  
-
-    def update(self, keyspressed, keysdown):
+        self.cap = 20;
+    
+    def update(self, pos, self_pos):
         #update things
         if self.cur < len(sentences[self.ind])*20-20:
             if self.cur % 20 == 0:
-                relx, rely = self.player.x-self.startx, self.player.y-self.starty
+                relx, rely = pos[0]-self_pos[0], pos[1]-self_pos[1]
                 angle = math.atan2(rely+random.randint(-30, 30), relx+ random.randint(-30, 30))
                 direction = {
                     "angle": angle,
@@ -87,25 +65,3 @@ class PlayState(State):
             else:
                 self.startx, self.starty = random.randint(0, 600), random.choice([0, 600])
         self.player.update(keysdown)
-        removelist = []
-
-        for nxt in self.letter:
-            if self.player.body.colliderect(nxt.body):
-                if self.player.hp.hp - 5 >= 0:
-                    self.player.hp.hp -= 5
-                removelist.append(nxt)
-        
-        for nxt in self.letter:
-            nxt.update()
-            if nxt.x > 600 or nxt.x < 0 or nxt.y > 600 or nxt.x < 0:
-                removelist.append(nxt)
-        for nxt in removelist:
-            self.letter.remove(nxt)
-
-    
-
-    def render(self, screen, h: float, w: float):
-        self.player.render(screen, (h, w))
-        for nxt in self.letter:
-            nxt.render(screen, (h, w))
-
