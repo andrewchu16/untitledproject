@@ -7,6 +7,7 @@ from src.turret import Turret
 from src.bullet import Bullet 
 import math
 import random
+import sys
 
 pygame.font.init()
 
@@ -91,16 +92,16 @@ class PlayState():
     def update(self, keyspressed, keysdown):
 
         self.cnter += 1
-        if self.cnter > 80:
+        if self.cnter % 80 == 0 and self.cnter != 0:
             self.timer += 1
         
-        if self.timer > 80:
+        if self.timer % 80 == 0 and self.timer != 0:
             self.armageddon_status = True
         
         if self.timer % 20 == 0:
             self.lettergen.level += 1
         
-        if self.timer % 5 == 0:
+        if self.timer % 100 == 0:
             if random.randint(1, 2) == 1:
                 x, y = random.choice([0, 700]), random.randint(0, 700)
             else:
@@ -144,6 +145,9 @@ class PlayState():
             if self.player.body.colliderect(nxt.body):
                 if self.player.hp.hp - nxt.hp >= 0:
                     self.player.hp.hp -= nxt.hp
+                else:
+                    #bye bye
+                    sys.exit(0)
                 removelist.append(nxt)
         
         # Deletes old letters and awards money for killing letters 
@@ -199,7 +203,8 @@ class PlayState():
             go.update((self.player.x, self.player.y))
         
         for nxt in removelist:
-            self.enemylist.remove(nxt)
+            if nxt in self.enemylist:
+                self.enemylist.remove(nxt)
 
     def render(self, screen, h: float, w: float):
         for nxt in self.letter:

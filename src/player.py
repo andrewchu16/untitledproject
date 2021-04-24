@@ -32,7 +32,7 @@ class Player():
 
         self.attack = Attack(1000)
 
-        self.spritesheet = pygame.image.load('assets/images/character.png')
+        # self.spritesheet = pygame.image.load('assets/images/character.png')
     
     @property
     def dims(self) -> tuple((int, int)):
@@ -88,6 +88,7 @@ class Player():
 
     def render(self, screen, dims):
         screen.blit(self.sprite, (self.x, self.y))
+        # screen.blit(self.spritesheet, self.pos)
 
         self.attack.render(screen)
         self.hp.render(screen)
