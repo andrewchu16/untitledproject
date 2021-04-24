@@ -4,7 +4,7 @@ import random
 
 
 
-class Player(pygame.sprite.sprite):
+class Player():
 
     def __init__(self):
         self.dims: tuple((int, int)) = (50, 50)
@@ -27,7 +27,7 @@ class Player(pygame.sprite.sprite):
     def h(self):
         return self.dims[1]
 
-    def update(self, keysdown: list((bool))):
+    def update(self, keysdown: list):
 
         moveVecx = 0
         moveVecy = 0
