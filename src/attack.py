@@ -1,10 +1,9 @@
 import pygame
 import math
-# from src.utilities.mouse import cursor
 
 
 class Attack:
-    def __init__(self, duration=1000, mRange=100, rRange=380):
+    def __init__(self, duration=1000, mRange=50, rRange=380):
         self.duration = duration  # how long it takes to complete attack
         self.counter = 0  # progress into attack
         self.mode = ""
@@ -17,13 +16,23 @@ class Attack:
 
         self.slope: float = 0.0
 
-        self.body = pygame.Rect((0, 0), (20, 20))
+        # ranged attack body mask
+        self.body: pygame.Rect = None
+
+        # whenever not shooting, self.body becomes None, instead copy from prototype
+        self.body_prototype = pygame.Rect((0, 0), (20, 20))
+
+        # melee attack bodies mask
+        self.bodies: list[pygame.Rect] = [None for i in range(0 * mRange // 10)]
+
+        # arc size of swing in degrees
+        self.swingArc = 170           
+
 
     @property 
     def pos(self) -> tuple((int, int)): 
         return (self.body.x, self.body.y)
 
-    # ppos: player's position as a list/tuple
     def update(self, start: tuple((int, int)), target: tuple((int, int)), mode: str):
         """
         [args]
@@ -37,6 +46,11 @@ class Attack:
             self.target = target[:]
             self.start = start[:]
             self.slope = None if start[0] == target[0] else (start[1] - target[1]) / (start[0] - target[0])
+
+            self.hp = 5
+
+            if mode == "r":
+                self.body = self.body_prototype.copy()
 
 
         if self.counter != 0 and self.mode == "r":
@@ -70,14 +84,21 @@ class Attack:
         
         self.counter += 30
 
-        if self.counter > self.duration:
+        if self.counter > self.duration or self.hp <= 0:
             self.counter = 0
             self.mode = ""
+            self.body = None
+            self.hp = 0
 
     # melee attack
     def swing(self):
+        relAngle = math.atan2(self.target[1] - self.start[1], self.target[0] - self.start[0])
+        radians = math.radians(self.swingArc * self.counter / self.duration)
+        chx, chy = math.cos(radians), math.sin(radians)
 
-
+        for body in self.bodies:
+            pass
+        
         self.counter += 80
 
         if self.counter > self.duration:

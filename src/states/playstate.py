@@ -3,8 +3,11 @@ from src.player import Player
 from src.letters import Letter
 from src.letterspit import Letterspit
 from src.enemy import Spitter
+from src.turret import Turret
 import math
 import random
+
+pygame.font.init()
 
 class PlayState():
 
@@ -24,6 +27,9 @@ class PlayState():
         self.armageddon_cur = 0
         self.arma_counter = 0
 
+        self.money = 0
+        self.turrets = []
+        self.money_font = pygame.font.SysFont("Arial", 50)
 
     def enter(self):
         #do nothing
@@ -80,8 +86,18 @@ class PlayState():
                 if self.player.hp.hp - 5 >= 0:
                     self.player.hp.hp -= 5
                 removelist.append(nxt)
-            if self.player.attack.body.colliderect(nxt.body):
+            
+            # ranged attack
+            #  when hp reaches 0, self.player.attack.body = None
+            if self.player.attack.body and self.player.attack.body.colliderect(nxt.body):
+                self.player.attack.hp -= 1
                 removelist.append(nxt)
+
+            # melee attack
+            # if self.player.attack.bodies is empty
+            for body in self.player.attack.bodies:
+                if body.colliderect(nxt.body):
+                    removelist.append(nxt)
         
         for nxt in self.letter:
             nxt.update()
@@ -113,4 +129,6 @@ class PlayState():
             for go in nxt.peons:
                 go.render(screen, (h, w))
             nxt.render(screen)
+        money_text = self.money_font.render("$"+str(self.money), False, (38,54,139))
+        screen.blit(money_text, ((700-money_text.get_width())//2, 40))
 
