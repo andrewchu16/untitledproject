@@ -2,7 +2,11 @@ import pygame
 import math
 import random
 
-class Letters():
+pygame.font.init()
 
-    def __init__(self):
-        pass
+class Letter():
+
+    def __init__(self, health, speed):
+
+        self.hp = health
+        self.speed = speed

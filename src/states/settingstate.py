@@ -2,7 +2,7 @@ import pygame
 from src.utilities.buttons import Button
 
 start = Button((500, 50), (1, 1), None)
-turn = Button((500, 50), (1, 1), None)
+setting = Button((500, 50), (1, 1), None)
 
 class SettingState():
 
@@ -19,7 +19,7 @@ class SettingState():
             self.changeTo = "intro"
             
         start.function = escape1
-        turn.function = escape2
+        setting.function = escape2
   
     def exit(self):
         self.changeTo = None
@@ -28,11 +28,11 @@ class SettingState():
     def update(self, keyspressed, keysdown):
         #update things
         start.update()
-        turn.update()
+        setting.update()
     
 
     def render(self, screen, h: float, w: float):
         start.pos = (w // 2, h // 2 + 50)
-        turn.pos = (w // 2, h // 2 - 50)
+        setting.pos = (w // 2, h // 2 - 50)
         start.render(screen)
-        turn.render(screen)
+        setting.render(screen)

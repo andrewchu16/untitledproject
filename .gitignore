@@ -1,13 +1,7 @@
-# VSCode folder
-.vscode/
-
-# Byte-compiled / optimized / DLL files
+# pycache, .pyc, .pyo, .pyd
 __pycache__/
 *.py[cod]
 *$py.class
 
 # replit folder
 .replit
-
-# tokens
-config.py
