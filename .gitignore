@@ -8,3 +8,6 @@ __pycache__/
 
 # replit folder
 .replit
+
+# tokens
+config.py
