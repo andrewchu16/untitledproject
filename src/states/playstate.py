@@ -92,16 +92,16 @@ class PlayState():
     def update(self, keyspressed, keysdown):
 
         self.cnter += 1
-        if self.cnter % 80 == 0 and self.cnter != 0:
+        if self.cnter % 60 == 0 and self.cnter != 0:
             self.timer += 1
         
-        if self.timer % 100 == 0 and self.timer != 0:
+        if self.timer % 40 == 0 and self.timer != 0:
             self.armageddon_status = True
         
-        if self.timer % 100 == 0 and self.timer != 0:
+        if self.timer % 10 == 0 and self.timer != 0:
             self.lettergen.level += 1
         
-        if self.timer % 100 == 0 and self.timer != 0:
+        if self.timer % 10 == 0 and self.timer != 0:
             if random.randint(1, 2) == 1:
                 x, y = random.choice([0, 700]), random.randint(0, 700)
             else:
