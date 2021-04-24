@@ -1,6 +1,7 @@
 import pygame
 from src.utilities.buttons import Button
 
+
 start = Button((500, 50), (1, 1), None)
 setting = Button((500, 50), (1, 1), None)
 

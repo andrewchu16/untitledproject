@@ -1,6 +1,8 @@
 import pygame
 from src.player import Player
-
+from src.letters import Letter
+import math
+import random
 
 class PlayState():
 
@@ -12,12 +14,16 @@ class PlayState():
     def enter(self):
 
         self.player = Player()
-        angle = math.atan2(player.y, player.x)
+        angle = math.atan2(self.player.y, self.player.x)
         direction = {
-            "chx": math.cos(angle)
+            "chx": math.cos(angle),
             "chy": math.sin(angle)
         }
-        self.letter = Letter(1, direction)
+        if random.randint(1, 2) == 1:
+            startx, starty = 0, random.randint(0, 600)
+        else:
+            startx, starty = random.randint(0, 600), 0
+        self.letter = Letter(1, direction, (startx, starty))
   
     def exit(self):
 
@@ -28,6 +34,8 @@ class PlayState():
         #update things
         self.player.update(keysdown)
         self.letter.update()
+        if letter.x > 600 or letter.x < 0 or letter.y > 600 or letter.x < 0:
+            self.letter 
     
 
     def render(self, screen, h: float, w: float):

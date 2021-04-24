@@ -2,4 +2,7 @@ import pygame
 
 
 class Camera:
-    pass
+    
+
+    def render(screen):
+        pass

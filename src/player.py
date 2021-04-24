@@ -1,12 +1,8 @@
 import pygame
 import math
 import random
+import asyncio
 
-
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 class Player():
 
     def __init__(self):
@@ -56,3 +52,7 @@ class Player():
 
     def render(self, screen, dims):
         screen.blit(self.sprite, (self.x, self.y))
+
+
+    def attack_ranged(self):
+        pass

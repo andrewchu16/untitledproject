@@ -4,11 +4,11 @@ import random
 
 class Letter():
 
-    def __init__(self, health, direction):
-        self.dims: tuple((int, int)) = (15, 15)
-        self.sprite = pygame.Surface((15, 15))
+    def __init__(self, health, direction, start):
+        self.dims: tuple((int, int)) = (20, 20)
+        self.sprite = pygame.Surface((20, 20))
         self.sprite.fill((69, 69, 69))
-        self.x, self.y = 50, 50
+        self.x, self.y = start[0], start[1]
         self.body = pygame.Rect((self.x, self.y), (self.w, self.h))
 
         #health
