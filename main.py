@@ -33,6 +33,7 @@ if __name__ == '__main__':
 
     gameWindow = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("untitled project!!")
+    pygame.mouse.set_visible(False)
 
     clock = pygame.time.Clock()
 
