@@ -31,7 +31,7 @@ if __name__ == '__main__':
     # dimmensions of window
     WIDTH, HEIGHT = 700, 700
 
-    gameWindow = pygame.display.set_mode((WIDTH, HEIGHT))
+    gameWindow = pygame.display.set_mode((WIDTH, HEIGHT), RESIZABLE)
     pygame.display.set_caption("untitled project!!")
     pygame.mouse.set_visible(False)
 
