@@ -18,7 +18,7 @@ class Player():
         self.hp = Healthbar(1000)
         
         #mobility
-        self.speed = 2
+        self.speed = 4
 
         self.attack = Attack(1000)
 
@@ -53,9 +53,9 @@ class Player():
             moveVecx = round(moveVecx/diag, 2)
             moveVecy = round(moveVecy/diag, 2)
         
-        self.body.move_ip(moveVecx, moveVecy)
-        self.x = self.body.x
-        self.y = self.body.y
+        self.x += moveVecx
+        self.y += moveVecy
+        self.body.x, self.body.y = self.x, self.y
 
         self.attack.update(self.pos)
 

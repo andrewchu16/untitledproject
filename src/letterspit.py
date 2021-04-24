@@ -1,6 +1,7 @@
 import pygame
 import math
 import random
+from src.letters import Letter
 
 sentences = [
     'Traceback(mostrecentcalllast):',
@@ -35,33 +36,42 @@ colours = {
     '5': (240,0,255) #purple
 }
 
-class LetterSpit():
+class Letterspit():
     
     def __init__(self):
         self.cur = 0
         self.ind = random.randint(0, len(sentences)-1)
 
-        self.cap = 20;
+        self.cap = 20
+        if random.randint(1, 2) == 1:
+            self.x, self.y = random.choice([0, 600]), random.randint(0, 600)
+        else:
+            self.x, self.y = random.randint(0, 600), random.choice([0, 600])
     
     def update(self, pos, self_pos):
         #update things
-        if self.cur < len(sentences[self.ind])*20-20:
-            if self.cur % 20 == 0:
-                relx, rely = pos[0]-self_pos[0], pos[1]-self_pos[1]
+        tmp = self.cur
+        self.cur+=1
+        xx, yy = self.x, self.y
+        if self_pos != None:
+            xx = self_pos[0]
+            yy = self_pos[1]
+        if tmp < len(sentences[self.ind])*self.cap-self.cap:
+            if tmp % self.cap == 0:
+                relx, rely = pos[0]-xx, pos[1]-yy
                 angle = math.atan2(rely+random.randint(-30, 30), relx+ random.randint(-30, 30))
                 direction = {
                     "angle": angle,
                     "chx": math.cos(angle),
                     "chy": math.sin(angle)
                 }
-                if sentences[self.ind][self.cur//20] != " ":
-                    self.letter.append(Letter(1, direction, (self.startx, self.starty), sentences[self.ind][self.cur//20], colours[col[self.ind][self.cur//20]]))
-            self.cur+=1
+                if sentences[self.ind][tmp//self.cap] != " ":
+                    return Letter(1, direction, (xx, yy), sentences[self.ind][tmp//self.cap], colours[col[self.ind][tmp//self.cap]])
         else:
             self.cur = 0
             self.ind = random.randint(0, len(sentences)-1)
             if random.randint(1, 2) == 1:
-                self.startx, self.starty = random.choice([0, 600]), random.randint(0, 600)
+                self.x, self.y = random.choice([0, 600]), random.randint(0, 600)
             else:
-                self.startx, self.starty = random.randint(0, 600), random.choice([0, 600])
-        self.player.update(keysdown)
+                self.x, self.y = random.randint(0, 600), random.choice([0, 600])
+            return None

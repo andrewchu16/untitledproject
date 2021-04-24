@@ -20,5 +20,5 @@ class Healthbar():
 
     def render(self, screen):
 
-        screen.blit(self.health_bar_show, (200, 540))
-        screen.blit(self.health_bar, (200, 540))
+        screen.blit(self.health_bar_show, (250, 640))
+        screen.blit(self.health_bar, (250, 640))

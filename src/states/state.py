@@ -10,3 +10,9 @@ class State():
   
     def exit(self):
         self.changeTo = None
+
+    def update(self): 
+        ... 
+
+    def render(self):
+        ... 
