@@ -3,7 +3,7 @@ from pygame.constants import RESIZABLE
 from src.utilities.mouse import cursor
 from statemachine import StateMachine
 from src.utilities.palette import col
-# import config
+# import configa
 
 # put display updates in here
 def update_display():

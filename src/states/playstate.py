@@ -95,13 +95,13 @@ class PlayState():
         if self.cnter % 60 == 0 and self.cnter != 0:
             self.timer += 1
         
-        if self.cnter % 1000 == 0 and self.cnter != 0:
+        if self.cnter % 3000 == 0 and self.cnter != 0:
             self.armageddon_status = True
         
-        if self.cnter % 300 == 0 and self.timer != 0:
+        if self.cnter % 250 == 0 and self.timer != 0:
             self.lettergen.level += 1
         
-        if self.cnter % 200 == 0 and self.timer != 0:
+        if self.cnter % 400 == 0 and self.timer != 0:
             if random.randint(1, 2) == 1:
                 x, y = random.choice([0, 700]), random.randint(0, 700)
             else:

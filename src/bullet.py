@@ -20,7 +20,7 @@ class Bullet():
         self.hp = health
         
         #mobility
-        self.speed = 5
+        self.speed = 10
         self.direction = direction
 
     @property

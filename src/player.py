@@ -18,14 +18,14 @@ class Player():
         self.bulletList = []
 
         # attack cooldown
-        self.cooldown = 100
-        self.cooldownMax = 100
+        self.cooldown = 20
+        self.cooldownMax = 20
 
         # bullet damage and health 
-        self.bulletHealth = 5 
+        self.bulletHealth = 50
 
         #health
-        self.hp = Healthbar(250)
+        self.hp = Healthbar(1000)
         
         #mobility
         self.speed = 4
