@@ -46,14 +46,15 @@ class Attack:
     def render(self, screen, ppos):
         if self.mode == "r":
             if self.slope != None:
-                x2 = (self.rRange * self.counter / self.duration) / math.sqrt(self.slope**2 + 1) * (-1 if self.target[0] < self.start[0] else 1) + self.start[0]
-                y2 = self.slope * (x2 - self.target[0]) + self.target[1]
-
-                # if self.target[0] < self.start[0]: y2 = -y2
-                self.rect.x, self.rect.y = x2, y2
-                pygame.draw.rect(screen, (180, 50, 50), self.rect)
+                self.rect.x = (self.rRange * self.counter / self.duration) / math.sqrt(self.slope**2 + 1) * (-1 if self.target[0] < self.start[0] else 1) + self.start[0]
+                self.rect.y = self.slope * (self.rect.x - self.target[0]) + self.target[1]
             else:
+                self.rect.x = self.target[0]
                 print("rendering None slope range attack...", self.counter)
+                self.rect.y = self.start[0] - self.rRange * self.counter / self.duration
+
+            pygame.draw.rect(screen, (180, 50, 50), self.rect)
+
         elif self.mode == "m":
             print("rendering melee attack...", self.counter)
 
