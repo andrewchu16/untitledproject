@@ -6,7 +6,7 @@ col = {
     "green": (0, 255, 0),
     "blue": (0, 0, 255),
     "cyan": (0, 255, 255),
-    "purple": (0x80, 00, 0x80)
+    "purple": (0x80, 00, 0x80),
     "blurple": (78, 93, 148) # This will not be used
 }
 
