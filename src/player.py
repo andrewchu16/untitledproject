@@ -8,11 +8,11 @@ from src.attack import Attack
 class Player():
 
     def __init__(self):
-        self.dims: tuple((int, int)) = (50, 50)
+        self.w, self.h = 50, 50
         self.sprite = pygame.Surface((50, 50))
-        self.sprite.fill((255,100,180))
+        self.sprite.fill((255, 100, 180))
         self.x, self.y = 400, 400
-        self.body = pygame.Rect((self.x, self.y), (self.w, self.h))
+        self.body = pygame.Rect((self.x, self.y), self.dims)
 
         #health
         self.hp = Healthbar(1000)
@@ -21,15 +21,10 @@ class Player():
         self.speed = 4
 
         self.attack = Attack(1000)
-
     
     @property
-    def w(self):
-        return self.dims[0]
-
-    @property 
-    def h(self):
-        return self.dims[1]
+    def dims(self) -> tuple((int, int)):
+        return (self.w, self.h)
 
     @property 
     def pos(self):
@@ -66,4 +61,4 @@ class Player():
         screen.blit(self.sprite, (self.x, self.y))
         self.hp.render(screen)
 
-        self.attack.render(screen, self.pos)
+        self.attack.render(screen)
