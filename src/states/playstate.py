@@ -20,9 +20,9 @@ class PlayState():
             "chy": math.sin(angle)
         }
         if random.randint(1, 2) == 1:
-            startx, starty = 0, random.randint(0, 600)
+            startx, starty = random.choice([0, 600]), random.randint(0, 600)
         else:
-            startx, starty = random.randint(0, 600), 0
+            startx, starty = random.randint(0, 600), random.choice([0, 600])
         self.letter = Letter(1, direction, (startx, starty))
   
     def exit(self):
@@ -35,8 +35,9 @@ class PlayState():
         self.player.update(keysdown)
         if self.letter != None:
             self.letter.update()
-        if letter.x > 600 or letter.x < 0 or letter.y > 600 or letter.x < 0:
-            self.letter = None
+        if self.letter != None:
+            if self.letter.x > 600 or self.letter.x < 0 or self.letter.y > 600 or self.letter.x < 0:
+                self.letter = None
     
 
     def render(self, screen, h: float, w: float):
