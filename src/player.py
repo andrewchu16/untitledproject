@@ -4,6 +4,7 @@ import random
 from src.utilities.mouse import cursor
 from src.utilities.healthbar import Healthbar
 from src.attack import Attack
+from src.bullet import Bullet
 
 class Player():
 
@@ -13,6 +14,15 @@ class Player():
         self.sprite.fill((255, 100, 180))
         self.x, self.y = 400, 400
         self.body = pygame.Rect((self.x, self.y), self.dims)
+
+        self.bulletList = []
+
+        # attack cooldown
+        self.cooldown = 100
+        self.cooldownMax = 100
+
+        # bullet damage and health 
+        self.bulletHealth = 
 
         #health
         self.hp = Healthbar(1000)
@@ -29,6 +39,11 @@ class Player():
     @property 
     def pos(self):
         return (self.x, self.y)
+
+    def updateStats(self, nCooldown=0, nDamage=0):
+        # changes stats by amount 
+        self.cooldownMax += nCooldown 
+        self.damage += nDamage
 
     def update(self, keysdown: list):
 
@@ -52,15 +67,20 @@ class Player():
         self.y += moveVecy
         self.body.x, self.body.y = self.x, self.y
 
-        mode = ""  # if neither, select no mode
-        if cursor.Lclick:
-            mode = "m"
-        elif cursor.Rclick:
-            mode = "r"
-        # else:
-            # mode = ""
+        self.cooldown -= 1
 
-        self.attack.update(self.pos, cursor.pos, mode)
+        if self.cooldown <= 0 and cursor.Lclick:
+            self.cooldown = self.cooldownMax
+            relx, rely = cursor.x-self.x, cursor.y-self.y
+                angle = math.atan2(rely+random.randint(-30, 30), relx+ random.randint(-30, 30))
+                direction = {
+                    "angle": angle,
+                    "chx": math.cos(angle),
+                    "chy": math.sin(angle)
+                }
+            self.bulletList.append(Bullet(self.bulletHealth, direction, self.pos, (150, 2, 180), 300))
+
+            
         self.hp.update()
 
 

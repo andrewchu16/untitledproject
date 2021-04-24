@@ -40,5 +40,6 @@ class Spitter():
         if res != None:
             self.peons.append(res)
 
+
     def render(self, screen):
         screen.blit(self.sprite, (self.x, self.y))

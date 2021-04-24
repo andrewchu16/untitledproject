@@ -5,7 +5,7 @@ import random
 
 class Bullet():
 
-    def __init__(self, health, direction, start, colour):
+    def __init__(self, health, direction, start, colour, rRange):
         self.dims: tuple((int, int)) = (20, 20)
         self.sprite = pygame.Surface((20, 20))
         self.sprite.fill(colour)
@@ -14,6 +14,8 @@ class Bullet():
 
         self.body = pygame.Rect(self.pos, self.dims)
 
+        self.rRange = rRange
+        self.distance = 0
         #health
         self.hp = health
         
@@ -34,9 +36,10 @@ class Bullet():
         return (self.x, self.y)
 
     def update(self):
-
         moveVecx = self.direction["chx"] * self.speed
         moveVecy = self.direction["chy"] * self.speed
+
+        self.distance += math.sqrt(moveVecx**2 + moveVecy**2)
         self.x += moveVecx
         self.y += moveVecy
         self.body.x = self.x
