@@ -4,4 +4,5 @@ import random
 
 class Letters():
 
-    def __iti
+    def __init__(self):
+        pass

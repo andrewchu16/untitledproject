@@ -21,6 +21,6 @@ class Mouse:
         self.rect.x, self.rect.y = self.x, self.y
 
     def render(self, screen):
-        pyagem.draw.rect(screen, col["white"], self.rect)
+        pygame.draw.rect(screen, col["white"], self.rect) #pyagem lies here
 
 cursor = Mouse()

@@ -1,11 +1,11 @@
 import pygame
-from mouse import cursor
-from palette import col
+from src.utilities.mouse import cursor
+from src.utilities.palette import col
 
 
 class Button:
 
-    def __init__(self, dimensions: tuple[int, int], position: tuple[int, int], function):
+    def __init__(self, dimensions: tuple((int, int)), position: tuple((int, int)), function):
         #make a Button
     
         self.dims = dimensions

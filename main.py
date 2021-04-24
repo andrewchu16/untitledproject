@@ -8,7 +8,9 @@ from src.utilities.palette import col
 def update_display():
     gameWindow.fill(col["white"])
     
-    state.render(gameDisplay, screen_heigh, screen_width)
+    state.render(gameWindow, WIDTH, HEIGHT)
+    
+    cursor.render(gameWindow)
 
     pygame.display.update()
 

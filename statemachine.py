@@ -1,23 +1,22 @@
 import pygame
 from src.states import *
-
+# from src.utilities.mouse import cursor
 
 class StateMachine:
   
     def __init__(self):
         self.states = {
             "play": playstate.PlayState(),
-            "intro": introstate.Introstate(),
+            "intro": introstate.IntroState(),
             "pause": pausestate.PauseState(),
             "setting": settingstate.SettingState()
         }
-        self.currentstates = ["start"]
-        
+        self.currentstate = self.states["intro"]
         self.currentstate.enter()
   
     def change(self, nxt):
         self.currentstate.exit()
-        self.currentstate = self.states[nxt]
+        self.currentstate = self.states[nxt] #so it says that 'turn' isnt a part of self.states (its not because self.states only has keys play intro pause setting)
         self.currentstate.enter()
   
     def update(self, keyspressed, keysdown):
@@ -28,4 +27,4 @@ class StateMachine:
             
     def render(self, screen, h, w):
         self.currentstate.render(screen, h, w)
-        cursor.render(screen)
+        # cursor.render(screen)

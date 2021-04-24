@@ -1,5 +1,5 @@
 import pygame
-from src.utilities.buttons.py import buttons
+from src.utilities.buttons import Button
 
 start = Button((500, 50), (1, 1), None)
 turn = Button((500, 50), (1, 1), None)
@@ -16,7 +16,7 @@ class SettingState():
             self.changeTo = "play"
 
         def escape2():
-            self.changeTo = "turn"
+            self.changeTo = "intro"
             
         start.function = escape1
         turn.function = escape2
