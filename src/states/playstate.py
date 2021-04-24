@@ -95,7 +95,7 @@ class PlayState():
         if self.cnter % 60 == 0 and self.cnter != 0:
             self.timer += 1
         
-        if self.cnter % 4000 == 0 and self.timer != 0:
+        if self.cnter % 4000 == 0 and self.cnter != 0:
             self.armageddon_status = True
         
         if self.cnter % 1000 == 0 and self.timer != 0:
