@@ -11,6 +11,10 @@ class Mouse:
         self.Lclick, self.Rclick = False, False
         self.scroll = 0
 
+    @property
+    def pos(self) -> tuple((int, int)):
+        return (self.x, self.y)
+
     def update(self, scroll):
         self.scroll = scroll
         self.x, self.y = pygame.mouse.get_pos()

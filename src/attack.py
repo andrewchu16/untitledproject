@@ -31,7 +31,7 @@ class Attack:
         end: the direction the attack is aimed
         mode: melee or ranged
         """
-        if self.counter == 0:
+        if self.counter == 0 and mode:
             self.counter = 1
             self.mode =  mode
             self.target = target[:]

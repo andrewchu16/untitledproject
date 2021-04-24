@@ -52,8 +52,15 @@ class Player():
         self.y += moveVecy
         self.body.x, self.body.y = self.x, self.y
 
-        self.attack.update(self.pos, (), (), "r or m")
+        mode = ""  # if neither, select no mode
+        if cursor.Lclick:
+            mode = "m"
+        elif cursor.Rclick:
+            mode = "r"
+        # else:
+            # mode = ""
 
+        self.attack.update(self.pos, cursor.pos, mode)
         self.hp.update()
 
 
