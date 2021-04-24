@@ -90,8 +90,10 @@ class PlayState():
             # ranged attack
             #  when hp reaches 0, self.player.attack.body = None
             if self.player.attack.body and self.player.attack.body.colliderect(nxt.body):
-                self.player.attack.hp -= 1
-                removelist.append(nxt)
+                #two cases, letter has more or attack has more hp
+                tmp = self.player.attack.hp
+                self.player.attack.hp -= min(tmp, nxt.hp)
+                nxt.hp -= min(tmp, nxt.hp)
 
             # melee attack
             # if self.player.attack.bodies is empty
@@ -101,8 +103,12 @@ class PlayState():
         
         for nxt in self.letter:
             nxt.update()
-            if nxt.x > 700 or nxt.x < 0 or nxt.y > 700 or nxt.x < 0:
+            if nxt.hp <= 0:
                 removelist.append(nxt)
+                self.money += nxt.max_health
+            elif nxt.x > 700 or nxt.x < 0 or nxt.y > 700 or nxt.x < 0:
+                removelist.append(nxt)
+
         for nxt in removelist:
             if nxt in self.letter:
                 self.letter.remove(nxt)
@@ -114,8 +120,19 @@ class PlayState():
                     if self.player.hp.hp - 5 >= 0:
                         self.player.hp.hp -= 5
                     removelist.append(nxt)
-            if nxt.x > 700 or nxt.x < 0 or nxt.y > 700 or nxt.x < 0:
-                removelist.append(nxt)
+                
+                if self.player.attack.body and self.player.attack.body.colliderect(nxt.body):
+                #two cases, letter has more or attack has more hp
+                    tmp = self.player.attack.hp
+                    self.player.attack.hp -= min(tmp, nxt.hp)
+                    nxt.hp -= min(tmp, nxt.hp)
+
+                if nxt.hp <= 0:
+                    removelist.append(nxt)
+                    self.money += nxt.max_health
+                elif nxt.x > 700 or nxt.x < 0 or nxt.y > 700 or nxt.x < 0:
+                    removelist.append(nxt)
+
             for nxt in removelist:
                 if nxt in go.peons:
                     go.peons.remove(nxt)

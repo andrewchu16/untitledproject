@@ -16,7 +16,7 @@ class Letter():
 
         #health
         self.hp = health
-        
+        self.max_health = health
         #mobility
         self.speed = 2
         self.direction = direction
