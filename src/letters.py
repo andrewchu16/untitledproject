@@ -6,7 +6,7 @@ pygame.font.init()
 
 class Letter():
 
-    def __init__(self, health, direction, start):
+    def __init__(self, health, direction, start, letter):
         self.dims: tuple((int, int)) = (20, 20)
         self.sprite = pygame.Surface((20, 20))
         self.sprite.fill((69, 69, 69))
@@ -23,7 +23,7 @@ class Letter():
         
         #text
         self.font = pygame.font.SysFont("Arial", 15)
-        self.text = self.font.render("L", False, (0, 255, 255))
+        self.text = self.font.render(letter, False, (0, 255, 255))
         self.sprite.blit(self.text, (0, 0))
     
     @property
@@ -38,10 +38,10 @@ class Letter():
 
         moveVecx = self.direction["chx"] * self.speed
         moveVecy = self.direction["chy"] * self.speed
-        
-        self.body.move_ip(moveVecx, moveVecy)
-        self.x = self.body.x
-        self.y = self.body.y
+        self.x += moveVecx
+        self.y += moveVecy
+        self.body.x = self.x
+        self.body.y = self.y
         
 
     def render(self, screen, dims):

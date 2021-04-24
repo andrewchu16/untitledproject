@@ -3,6 +3,7 @@ import math
 import random
 import asyncio
 from time import sleep
+from src.utilities.healthbar import Healthbar
 
 
 class Player():
@@ -11,11 +12,11 @@ class Player():
         self.dims: tuple((int, int)) = (50, 50)
         self.sprite = pygame.Surface((50, 50))
         self.sprite.fill((69, 69, 69))
-        self.x, self.y = 50, 50
+        self.x, self.y = 400, 400
         self.body = pygame.Rect((self.x, self.y), (self.w, self.h))
 
         #health
-        self.hp = 1000
+        self.hp = Healthbar(100)
         
         #mobility
         self.speed = 2
@@ -50,11 +51,14 @@ class Player():
         self.body.move_ip(moveVecx, moveVecy)
         self.x = self.body.x
         self.y = self.body.y
+
+        self.hp.update()
         
 
     def render(self, screen, dims):
         screen.blit(self.sprite, (self.x, self.y))
-        self.attack_ranged(screen)
+        self.hp.render(screen)
+        #self.attack_ranged(screen)
     
     # "r" = ranged, "m" = melee
     def attack(self, screen, style: str):
