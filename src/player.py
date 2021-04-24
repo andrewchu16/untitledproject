@@ -22,7 +22,7 @@ class Player():
         self.cooldownMax = 100
 
         # bullet damage and health 
-        self.bulletHealth = 
+        self.bulletHealth = 0
 
         #health
         self.hp = Healthbar(250)
@@ -72,12 +72,12 @@ class Player():
         if self.cooldown <= 0 and cursor.Lclick:
             self.cooldown = self.cooldownMax
             relx, rely = cursor.x-self.x, cursor.y-self.y
-                angle = math.atan2(rely+random.randint(-30, 30), relx+ random.randint(-30, 30))
-                direction = {
-                    "angle": angle,
-                    "chx": math.cos(angle),
-                    "chy": math.sin(angle)
-                }
+            angle = math.atan2(rely+random.randint(-30, 30), relx+ random.randint(-30, 30))
+            direction = {
+                "angle": angle,
+                "chx": math.cos(angle),
+                "chy": math.sin(angle)
+            }
             self.bulletList.append(Bullet(self.bulletHealth, direction, self.pos, (150, 2, 180), 300))
 
             
@@ -86,6 +86,6 @@ class Player():
 
     def render(self, screen, dims):
         screen.blit(self.sprite, (self.x, self.y))
-        self.hp.render(screen)
 
         self.attack.render(screen)
+        self.hp.render(screen)

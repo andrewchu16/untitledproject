@@ -23,7 +23,7 @@ class Spitter():
         self.speed = 2
 
         #movement bias value
-        self.bias_move = random.randint(-100, 100)
+        self.bias_move = random.randint(-200, 200)
         self.lettergen = Letterspit()
         self.lettergen.level = level * 2
         print(self.spit_speed)
